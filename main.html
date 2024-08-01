@@ -1,24 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- <script src="script.js " defer></script> -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Better Instagram</title>
-  </head>
-  <body>
-    <h1 style="text-align: center">Arrange Images by drag and drop</h1>
-    <div class="flex" id="parent">
-      <div id="div1" draggable="true" class="image" >Image 1</div>
-      <div id="div2" draggable="true" class="image" >Image 2</div>
-      <div id="div3" draggable="true" class="image" >Image 3</div>
-      <div id="div4" draggable="true" class="image" >Image 4</div>
-      <div id="div5" draggable="true" class="image" >Image 5</div>
-      <div id="div6" draggable="true" class="image" >Image 6</div>
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Click and Drag</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="items">
+    <div class="item item1">01</div>
+    <div class="item item2">02</div>
+    <div class="item item3">03</div>
+    <div class="item item4">04</div>
+    <div class="item item5">05</div>
+    <div class="item item6">06</div>
+    <div class="item item7">07</div>
+    <div class="item item8">08</div>
+    <div class="item item9">09</div>
+    <div class="item item10">10</div>
+    <div class="item item11">11</div>
+    <div class="item item12">12</div>
+    <div class="item item13">13</div>
+    <div class="item item14">14</div>
+    <div class="item item15">15</div>
+    <div class="item item16">16</div>
+    <div class="item item17">17</div>
+    <div class="item item18">18</div>
+    <div class="item item19">19</div>
+    <div class="item item20">20</div>
+    <div class="item item21">21</div>
+    <div class="item item22">22</div>
+    <div class="item item23">23</div>
+    <div class="item item24">24</div>
+    <div class="item item25">25</div>
+  </div>
 
-    <script src="./script.js"> </script>
+<script>
+//Your code goes here 
+// Your code here.
+document.addEventListener("DOMContentLoaded",()=>{
+let draggables = document.querySelectorAll(".image")
+// console.log(draggables)
+
+let draggedElement = null // which card/div you have started dragging
+draggables.forEach(draggable =>{
+
+    // dragStart, dragEnd
+
+    draggable.addEventListener("dragstart",(e)=>{
+         draggedElement = e.target
+        //  e.dataTransfer.setData("text", e.target.id)
+         draggedElement.style.opacity = 0.5
+    })
+
+    draggable.addEventListener("dragend",(e)=>{
+        e.target.style.opacity = 1
+   })
+
+   // dragover, dragenter, drop
+   let dragEvents = ["dragover", "dragenter", "drop"]
+//    draggable.addEventListener("dragover", (e)=>{
+//         e.preventDefault()
+//    })
+
+    dragEvents.forEach(drag =>{
+        draggable.addEventListener(drag, (e)=>{
+                e.preventDefault()
+
+            if(drag == "drop"){
+                 const targetElement = e.target // where you want to drop it
+                console.log("Helllloo")
+                if(targetElement != draggedElement){
+                    // swap the background image
+                    const draggedBackground = draggedElement.id
+                    draggedElement.id = targetElement.id
+                    targetElement.id = draggedBackground
+
+                    // swap: 
+
+                    const draggedText = draggedElement.innerText
+                    draggedElement.innerText = targetElement.innerText
+                    targetElement.innerText = draggedText
+
+
+                }
+
+
+
+            }
+        })
+    })
+
+
+})
+})
+</script>
+
   </body>
 </html>
